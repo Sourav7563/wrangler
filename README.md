@@ -175,6 +175,67 @@ rates below are specified as *records/second*.
 | High (167 Directives) |      426      | 127,946,398 |  82,677,845,324 | 106,367.27 |
 | High (167 Directives) |      426      | 511,785,592 | 330,711,381,296 | 105,768.93 |
 
+🆕 Byte Size and Time Duration Parsers
+
+Wrangler now supports native parsing and aggregation of **byte sizes** and **time durations** through new parsers and an aggregate directive.
+
+---
+ 📦 Byte Size Parser
+
+Parses human-readable size strings into bytes.  
+**Supported units:** `B`, `KB`, `MB`, `GB`, `TB`, `PB`
+
+**Usage:**
+```wrangler
+parse-as :size_column BYTE_SIZE
+```
+
+---
+
+### ⏱️ Time Duration Parser
+
+Parses human-readable duration strings into nanoseconds.  
+**Supported units:** `ns`, `ms`, `s`, `m`, `h`, `d`
+
+**Usage:**
+```wrangler
+parse-as :duration_column TIME_DURATION
+```
+
+---
+
+## 📊 aggregate-stats Directive
+
+The `aggregate-stats` directive performs aggregation over byte sizes and time durations, producing summary stats as new output columns.
+
+### ✅ Syntax
+
+```wrangler
+aggregate-stats :size_column :time_column :total_size_column :total_time_column [output_size_unit] [output_time_unit]
+```
+
+### ✅ Parameters
+
+| Parameter              | Description                                                              |
+|------------------------|--------------------------------------------------------------------------|
+| `:size_column`         | Column with byte size values (e.g., "10MB", "1.5GB")                     |
+| `:time_column`         | Column with duration values (e.g., "2h", "1200ms")                       |
+| `:total_size_column`   | Output column for the aggregated size result                             |
+| `:total_time_column`   | Output column for the aggregated time result                             |
+| `output_size_unit`     | *(Optional)* Output unit for size: `B`, `KB`, `MB`, `GB`, `TB`, `PB`     |
+| `output_time_unit`     | *(Optional)* Output unit for time: `ns`, `ms`, `s`, `m`, `h`, `d`        |
+
+### 🧪 Example
+
+```wrangler
+aggregate-stats :data_transfer :response_time :total_data_mb :total_response_sec MB s
+```
+
+This will:
+
+- Convert and sum all values in `:data_transfer`, output the total in MB → `:total_data_mb`
+- Convert and sum all values in `:response_time`, output the total in seconds → `:total_response_sec`
+
 
 ## Contact
 
