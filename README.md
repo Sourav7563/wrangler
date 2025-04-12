@@ -175,12 +175,13 @@ rates below are specified as *records/second*.
 | High (167 Directives) |      426      | 127,946,398 |  82,677,845,324 | 106,367.27 |
 | High (167 Directives) |      426      | 511,785,592 | 330,711,381,296 | 105,768.93 |
 
-🆕 Byte Size and Time Duration Parsers
+## 🆕 Byte Size and Time Duration Parsers
 
 Wrangler now supports native parsing and aggregation of **byte sizes** and **time durations** through new parsers and an aggregate directive.
 
 ---
- 📦 Byte Size Parser
+
+### 📦 Byte Size Parser
 
 Parses human-readable size strings into bytes.  
 **Supported units:** `B`, `KB`, `MB`, `GB`, `TB`, `PB`
@@ -235,8 +236,6 @@ This will:
 
 - Convert and sum all values in `:data_transfer`, output the total in MB → `:total_data_mb`
 - Convert and sum all values in `:response_time`, output the total in seconds → `:total_response_sec`
-
-
 ## Contact
 
 ### Mailing Lists
